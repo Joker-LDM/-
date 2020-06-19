@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}公告{% endblock %}
+
+{% block content %}
+<div class="conta" style="padding: 120px 150px;background-color: whitesmoke;">
+    {#  数据分析模块  #}
+    <div class="chart_div">
+        <h2>公告</h2>
+        {% for c in content %}
+            <div class="notice_li">
+                <h2>{{ c.notice_title }}</h2>
+                <p>{{ c.notice_time }}</p>
+                <div class="notic_con">
+                    {# 使富文本编辑的html代码生效 #}
+                    {% autoescape off %}
+                        {{ c.content }}
+                    {% endautoescape %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

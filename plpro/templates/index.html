@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}主页{% endblock %}
+
+{% block content %}
+    <!-- banner -->
+    <div class="home-intro" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col col-sm-12 col-md-6 col-12">
+                    <div class="content">
+                        <h5><span class="line"></span>欢迎使用</h5>
+                        <h2>人口数据</h2>
+                        <h2>分析系统</h2>
+                        <ul>
+                            <li><a href="#about" class="button">查看图表</a></li>
+                            <li><a href="{% url 'myapp:notice' %}" class="button2">查看公告</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col col-sm-12 col-md-6 col-12">
+                    <div class="content-image">
+                        <img src="{% static 'images/timg.jpeg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end banner -->
+
+    <!-- 话题选择 -->
+    <div class="about section bg-grey" id="about">
+        <div class="container">
+            <div class="title-section">
+                <h3 class="titles">数据图表</h3>
+            </div>
+            <div class="menu" style="border-radius: 20px;">
+                <ul>
+                    {# 循环卷名 #}
+                    {% for v in list_volume %}
+                    <li>
+                        <span>{{ v.volume }}<i class="icon"></i></span>
+                        {# 循环每个卷名下面的表名 #}
+                        {% for t in v.title %}
+                        <dl>
+                            {# 给详情页链接传递当前表的表名 #}
+                            <dt><a href="{% url 'myapp:details' t.title %}">{{ t.title }}</a></dt>
+                        </dl>
+                        {% endfor %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- end 话题选择 -->
+
+{% endblock %}
+
+
+
+
+

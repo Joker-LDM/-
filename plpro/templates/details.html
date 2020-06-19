@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}详情{% endblock %}
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+    <div class="conta" style="padding: 120px 150px 20px 150px;background-color: whitesmoke;">
+        {#  数据分析模块  #}
+        <div class="chart_div">
+            <h2>{{ table_name }}可视化选项</h2>
+            <form class="form-horizontal" action="{% url 'myapp:visualization' %}" method="post">
+                <input type="hidden" value="{{ table_name }}" name="table_name">
+                <div class="option_li">
+                    <label class="">数据选项:</label>
+                    <div class="menus">
+                        <select class="form-control" name="option" required>
+                            {% for i in option_list %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="option_li">
+                    <label class="">图表选项:</label>
+                    <div>
+                        <label class="radio-inline ">
+                            <input type="radio" name="visualization" id="bar" value="bar" required> 柱状图
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="visualization" id="lie" value="lie" required> 折线图
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="visualization" id="pie" value="pie" required> 饼图
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="visualization" id="pic" value="pic" required> 象型柱图
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-default button2">生成可视化</button>
+            </form>
+        </div>
+    </div>
+    {#  第六次表格内容  #}
+    <div class="content_div" style="">
+        <h2>{{ table_name }}表格</h2>
+        <p>*数据类型:{{ data_six }}</p>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>主列</th>
+                    {# 循环生成菜单 #}
+                    {% for i in menus_list %}
+                        <th>{{ i }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+            {# 循环每个mc列字典 #}
+            {% for info in mc_list_six %}
+                <tr>
+                    <td>{{ info.x_axit }}</td>
+                    {# 循环数值 #}
+                    {% for i in info.y_axit %}
+                        <td>{{ i.total}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {# 如果第五次查询数据为真，显示第五次数据表格 #}
+    {% if m1 %}
+    {#  第五次表格内容  #}
+    <div class="content_div" style="">
+        <h2>{{ table_name }}表格</h2>
+        <p>*数据类型:{{ data_five }}</p>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>主列</th>
+                    {# 循环生成菜单 #}
+                    {% for i in menus_list %}
+                        <th>{{ i }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+            {# 循环每个mc列字典 #}
+            {% for info in mc_list_five %}
+                <tr>
+                    <td>{{ info.x_axit }}</td>
+                    {# 循环数值 #}
+                    {% for i in info.y_axit %}
+                        <td>{{ i.total}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+{% endblock %}

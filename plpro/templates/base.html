@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zxx">
+{% load static %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{% block title %}{% endblock %}|人口数据分析系统</title>
+		<link rel="icon" href="{% static 'images/favicon.png' %}">
+
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/LineIcons.css' %}">
+		<link rel="stylesheet" href="{% static 'css/fakeLoader.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+        {% block head %}{% endblock %}
+	</head>
+	<body>
+		<!-- 加载动画 -->
+		<div class="fakeLoader"></div>
+		<!-- end 加载动画 -->
+
+		<!-- 页头 -->
+		<nav class="navbar navbar-expand-md fixed-top">
+			<div class="container">
+				<a href="{% url 'myapp:index' %}" class="navbar-brand">人口数据分析系统</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<i class="fa fa-bars"></i>
+				</button>
+			</div>
+		</nav>
+		<!-- end 页头 -->
+
+        {% block content %}
+        {% endblock %}
+
+		<!-- 页尾 -->
+		<div class="footer-bottom">
+			<span>人口数据分析系统</span>
+		</div>
+		<!-- end 页尾 -->
+
+		<!-- script -->
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'js/fakeLoader.min.js' %}"></script>
+		<script src="{% static 'js/jquery.filterizr.min.js' %}"></script>
+		<script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+		<script src="{% static 'js/magnific-popup.min.js' %}"></script>
+		<script src="{% static 'js/contact-form.js' %}"></script>
+		<script src="{% static 'js/main.js' %}"></script>
+        {# 下拉菜单jq代码 #}
+        <script type="text/javascript">
+            $(function(){
+
+                $(".menu ul li").click(function(){
+                    $(this).find("dl").slideToggle(200).parent().siblings().find("dl").slideUp(200);
+                    $(this).find("span i").toggleClass('action').parents().siblings().find("span i").removeClass('action');
+                });
+            })
+        </script>
+
+	</body>
+</html>
